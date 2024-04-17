@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>병신 List</title>
+	<style>
+		/* General page styles */
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+			background-size: 400% 400%;
+			animation: gradientBG 15s ease infinite;
+		}
+
+		@keyframes gradientBG {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+
+		/* Top bar and navigation styles */
+		.top-bar {
+			display: flex;
+			justify-content: space-between;
+			/* Space out nav and buttons */
+			align-items: center;
+			/* Align items vertically */
+			background-color: rgba(255, 255, 255, 0.8);
+			padding: 10px 0;
+			position: sticky;
+			top: 0;
+			z-index: 1000;
+		}
+
+		.nav-container {
+			flex-grow: 1;
+			/* Allows nav container to grow and push buttons to the right */
+		}
+
+		.nav {
+			display: flex;
+			list-style-type: none;
+			justify-content: center;
+			margin: 0;
+			padding: 0;
+		}
+
+		.nav li {
+			padding: 0 20px;
+		}
+
+		.nav a {
+			text-decoration: none;
+			color: #007bff;
+			transition: color 0.3s ease-out;
+		}
+
+		.nav a:hover {
+			color: #0056b3;
+		}
+
+		/* Button styles */
+		.header-buttons {
+			display: flex;
+			justify-content: flex-end;
+			/* Align buttons to the right */
+		}
+
+		.button-link,
+		.button-download {
+			margin-left: 10px;
+			/* Add left margin for spacing between buttons */
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			text-decoration: none;
+			color: white;
+			background-color: #007bff;
+			border: none;
+			transition: background-color 0.3s ease-out;
+		}
+
+		.button-link:hover,
+		.button-download:hover {
+			background-color: #0056b3;
+		}
+
+		/* Page title styles */
+		.page-title {
+			text-align: center;
+			margin-top: 20px;
+			/* Add space between top bar and page title */
+		}
+
+		/* Main content and table styles */
+		.main-content {
+			margin: 20px;
+			/* Add margin around the main content */
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			background-color: white;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		th,
+		td {
+			padding: 10px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #f0f0f0;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+		}
+
+		tbody tr:hover {
+			background-color: #f0f0f0;
+			/* Change background color on hover */
+		}
+
+		/* Pagination styles */
+		.pagination {
+			display: flex;
+			justify-content: center;
+			list-style-type: none;
+			padding: 0;
+		}
+
+		.pagination li {
+			margin: 0 5px;
+		}
+
+		.pagination a {
+			text-decoration: none;
+			padding: 5px 10px;
+			color: #007bff;
+			border: 1px solid #ddd;
+			background-color: #fff;
+		}
+
+		.pagination a:hover,
+		.pagination .active a {
+			background-color: #007bff;
+			color: white;
+		}
+
+		.pagination .active a {
+			font-weight: bold;
+			/* Makes the text bold for the active page */
+			pointer-events: none;
+			/* Optional: Disables the link for the active page */
+			cursor: default;
+		}
+
+		tbody tr {
+			cursor: pointer;
+			/* Makes the cursor look like a pointer when hovering over table rows */
+		}
+
+		tbody tr:hover {
+			background-color: #f0f0f0;
+			/* Change background color on hover */
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="top-bar">
+		<div class="nav-container">
+			<ul class="nav">
+				<li><a href="/home">Home</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="page-title">
+		<div>
+			<h1>병신 List</h1>
+			<div class="header-buttons">
+				<a href="register" class="button-link">Register</a>
+				<button class="button-download" onclick="window.location.href='/download/csv'">Download</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="main-content">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Age</th>
+					<th>Job</th>
+					<th>Rank</th>
+					<th>Reason</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="qudtls : ${qudtlsemf}"
+					th:onclick="'location.href=\'' + @{/qudtls/details/{id}(id=${qudtls.id})} + '\''">
+					<td th:text="${qudtls.id}"></td>
+					<td th:text="${qudtls.name}"></td>
+					<td th:text="${qudtls.age}"></td>
+					<td th:text="${qudtls.job}"></td>
+					<td th:text="${qudtls.rank}"></td>
+					<td th:text="${qudtls.reason}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<ul class="pagination">
+			<!-- Previous page sequence button -->
+			<li th:if="${currentPage > 9}">
+				<a th:href="@{/qudtlsMaster(page=${(currentPage div 10) * 10 - 10}, size=${size})}">&laquo;</a>
+			</li>
+
+			<!-- Individual page numbers -->
+			<li th:each="i : ${#numbers.sequence((currentPage div 10) * 10, 
+                                               (currentPage div 10) * 10 + 9)}"
+				th:classappend="${currentPage == i ? 'active' : ''}" th:if="${i < totalPages}">
+				<a th:href="@{/qudtlsMaster(page=${i}, size=${size})}" th:text="${i + 1}"></a>
+			</li>
+
+			<!-- Next page sequence button -->
+			<li th:if="${totalPages > ((currentPage div 10) + 1) * 10}">
+				<a th:href="@{/qudtlsMaster(page=${((currentPage div 10) + 1) * 10}, size=${size})}">&raquo;</a>
+			</li>
+		</ul>
+	</div>
+
+</body>
+
+</html>
