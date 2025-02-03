@@ -35,3 +35,31 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Java 관련 파일
+*.class
+*.jar
+*.war
+*.ear
+
+# IDE 및 설정 파일
+.idea/
+.vscode/
+*.iml
+*.log
+
+# Maven 빌드 파일
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties
+
+# Gradle 빌드 파일
+.gradle/
+build/
+!gradle-wrapper.jar
+
+# 환경 변수 파일 (보안)
+.env
+application.properties
+application.yml
